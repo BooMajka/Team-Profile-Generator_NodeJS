@@ -1,4 +1,3 @@
-const Manager = require("../lib/Manager");
 
 const generateMarkdownManager = data => {
 	return `
@@ -48,8 +47,8 @@ const generateMarkdownIntern = data => {
 			`
 }
 
-const generatePage = data => {
-	return `
+const generatePage = (manager, engineers, interns) => {
+  return `
 
 	<!DOCTYPE html>
 <html lang="en">
@@ -64,14 +63,14 @@ const generatePage = data => {
     <header class="title">My Team</header>
     <div class="gallery-wrapper">
 
-	${generateMarkdownManager(data)}
+	${manager.forEach((el) => generateMarkdownManager(el))}
 
-	${generateMarkdownEngineer(data)}
+	${engineers.forEach((el) => generateMarkdownEngineer(el))}
 
-	${generateMarkdownIntern(data)}
+	${interns.forEach((el) => generateMarkdownIntern(el))}
 
 	</div>
 	</body>
 	</html>
-	`
-}
+	`;
+};

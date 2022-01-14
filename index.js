@@ -1,7 +1,10 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
-const { generateMarkdownManager } = require("./src/generateMarkdown");
+const Engineer = require("./lib/Engineer");
+const Employee = require("./lib/Employee")
+const Intern = require("./lib/Intern");
+const { generatePage } = require("./src/generateMarkdown");
 
 const questionManager = [
   {
@@ -74,7 +77,7 @@ const questionIntern = () => {
     },
   ]);
 };
-const questionEngineer = () => {
+const questionOptions = () => {
   return inquirer.prompt([
     {
       type: "checkbox",
@@ -84,16 +87,44 @@ const questionEngineer = () => {
     },
   ]);
 };
-// const writeToFile = (file, data) => {
-// 	return fs.writeFile(file, data, (err) => {
-// 		if (err) return console.error(err);
-// 		});
-//   };
+
+let manager = [];
+let engineers = [];
+let interns = [];
+
+
+const chooseOption = () => {
+  questionOptions().then((responsesDataOptions) => {
+
+  if (responsesDataOptions[0] === "Add Engineer") {
+    questionEngineer().then((responsesDataEngineer) => {
+      engineers.push(new Engineer(responsesDataEngineer));
+      chooseOption();
+    });
+
+  } else if (responsesDataOptions[0] === "Add Intern") {
+    questionIntern().then((responsesDataIntern) => {
+      interns.push(new Intern(responsesDataIntern));
+      chooseOption();
+    });
+  } else {
+    writeToFile("index.html", generatePage(manager, engineers, interns));
+  }
+})
+}
+
+const writeToFile = (file, data) => {
+	return fs.writeFile(file, data, (err) => {
+		if (err) return console.error(err);
+		});
+  };
 
 const init = () => {
   inquirer.prompt(questionManager).then((responsesDataManager) => {
-    let manager = new Manager(responsesDataManager);
-    // writeToFile("index.html", generatePage(manager));
-  });
+    manager.push(new Manager(responsesDataManager));
+  })
+  chooseOption();
 };
+
+
 init();
