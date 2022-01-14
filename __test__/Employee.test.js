@@ -1,7 +1,7 @@
 const Employee = require("../lib/Employee");
 
 test("return Employee's name", () => {
-  let result = new Employee("Maya");
+  let result = new Employee("Maya", "id", "email");
   console.log(result)
   // expect(result.name).toBe("Maya");
 });
