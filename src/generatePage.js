@@ -1,14 +1,15 @@
 
 const generateMarkdownManager = data => {
+    console.log(data.name)
 	return `
-	<div class="gallery-item item-${data.manager_id}">
+	<div class="gallery-item item-${data.id}">
             <div class="description-wrapper">
-                <h2 class="name">${data.manager_name}</h2>
+                <h2 class="name">${data.name}</h2>
                 <span class="position-title">
                     <h3>Manager</h2>
-                        <p>id: ${data.manager_id}</p>
-                        <a href="mailto:${data.manager_email}">email: ${data.manager_email}</a>
-                        <p>office number: ${data.manager_number}</p>
+                        <p>id: ${data.id}</p>
+                        <a href="mailto:${data.email}">email: ${data.email}</a>
+                        <p>office number: ${data.number}</p>
                 </span>
             </div>
         </div>
@@ -17,13 +18,13 @@ const generateMarkdownManager = data => {
 
 const generateMarkdownEngineer = data => {
 	return `
-	<div class="gallery-item item-${data.engineer_id}">
+	<div class="gallery-item item-${data.id}">
             <div class="description-wrapper">
-                <h2 class="name">${data.engineer_name}</h2>
+                <h2 class="name">${data.name}</h2>
                 <span class="position-title">
                     <h3>Engineer</h2>
-                        <p>id: ${data.engineer_id}</p>
-                        <a href="mailto:${data.engineer_email}">email: ${data.engineer_email}</a></br>
+                        <p>id: ${data.id}</p>
+                        <a href="mailto:${data.email}">email: ${data.email}</a></br>
                         <a href="https://github.com/BooMajka" target="_blank">GitHub: ${data.engineer_github}</a>
                 </span>
             </div>
@@ -48,7 +49,9 @@ const generateMarkdownIntern = data => {
 }
 
 const generatePage = (manager, engineers, interns) => {
-  return `
+console.log(manager, engineers, interns);
+manager.forEach(el => console.log(el));
+ return `
 
 	<!DOCTYPE html>
 <html lang="en">
@@ -74,3 +77,5 @@ const generatePage = (manager, engineers, interns) => {
 	</html>
 	`;
 };
+
+module.exports = generatePage;

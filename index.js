@@ -4,7 +4,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Employee = require("./lib/Employee")
 const Intern = require("./lib/Intern");
-const { generatePage } = require("./src/generateMarkdown");
+const generatePage = require("./src/generatePage");
 
 const questionManager = [
   {
@@ -88,42 +88,82 @@ const questionOptions = () => {
   ]);
 };
 
-let manager = [];
-let engineers = [];
-let interns = [];
+let managerArray = [];
+let engineersArray = [];
+let internsArray = [];
 
 
 const chooseOption = () => {
   questionOptions().then((responsesDataOptions) => {
 
-  if (responsesDataOptions[0] === "Add Engineer") {
+  if (responsesDataOptions.options[0] === "Add Engineer") {
     questionEngineer().then((responsesDataEngineer) => {
-      engineers.push(new Engineer(responsesDataEngineer));
+      console.log("2");
+      let engineer = new Engineer(responsesDataEngineer);
+      engineer.name = responsesDataEngineer.engineer_name;
+      engineer.id = responsesDataEngineer.engineer_id;
+      engineer.email = responsesDataEngineer.engineer_email;
+      engineer.gitHub = responsesDataEngineer.engineer_github;
+      engineersArray.push(engineer);
+      // console.log("This is engineersArray:", engineersArray);
       chooseOption();
     });
 
-  } else if (responsesDataOptions[0] === "Add Intern") {
+  } else if (responsesDataOptions.options[0] === "Add Intern") {
     questionIntern().then((responsesDataIntern) => {
-      interns.push(new Intern(responsesDataIntern));
+       console.log("3");
+      let intern = new Intern(responsesDataIntern);
+      intern.name = responsesDataIntern.intern_name;
+      intern.id = responsesDataIntern.intern_id;
+      intern.email = responsesDataIntern.intern_email;
+      intern.school = responsesDataIntern.intern_school;
+      internsArray.push(intern);
+      //  console.log("This is internsArray:", internsArray);
       chooseOption();
     });
-  } else {
-    writeToFile("index.html", generatePage(manager, engineers, interns));
+  } else if (responsesDataOptions.options[0] === "Save and Finish"){
+    console.log("4");
+    return fs.writeFile(
+      "index.html",
+      generatePage(managerArray, engineersArray, internsArray),
+      (err) => {
+        if (err) return console.error(err);
+      })
   }
 })
 }
 
-const writeToFile = (file, data) => {
-	return fs.writeFile(file, data, (err) => {
-		if (err) return console.error(err);
-		});
-  };
+    
+
+
+// const writeToFile = (file, data) => {
+//     console.log("4");
+//     writeToFile(
+//       "index.html",
+//       generatePage(managerArray, engineersArray, internsArray)
+//     );
+	// return fs.writeFile(file, data, (err) => {
+	// 	if (err) return console.error(err);
+	// 	});
+  // };
 
 const init = () => {
-  inquirer.prompt(questionManager).then((responsesDataManager) => {
-    manager.push(new Manager(responsesDataManager));
-  })
-  chooseOption();
+    console.log("0");
+  inquirer
+    .prompt(questionManager)
+    .then((responsesDataManager) => {
+      console.log("This is responsesDataManager:", responsesDataManager);
+      let manager = new Manager(responsesDataManager);
+      manager.name = responsesDataManager.manager_name;
+      manager.id = responsesDataManager.manager_id;
+      manager.email = responsesDataManager.manager_email;
+      manager.number = responsesDataManager.manager_number;
+      managerArray.push(manager);
+       console.log("1");
+    })
+    .then(() => {
+      chooseOption();
+    });
 };
 
 
