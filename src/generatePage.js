@@ -1,7 +1,6 @@
 
-const generateMarkdownManager = data => {
-    console.log(data.name)
-	return `
+const generateMarkdownManager = (data) => {
+  return `
 	<div class="gallery-item item-${data.id}">
             <div class="description-wrapper">
                 <h2 class="name">${data.name}</h2>
@@ -13,11 +12,11 @@ const generateMarkdownManager = data => {
                 </span>
             </div>
         </div>
-	`
-}
+	`;
+};
 
-const generateMarkdownEngineer = data => {
-	return `
+const generateMarkdownEngineer = (data) => {
+  return `
 	<div class="gallery-item item-${data.id}">
             <div class="description-wrapper">
                 <h2 class="name">${data.name}</h2>
@@ -25,34 +24,32 @@ const generateMarkdownEngineer = data => {
                     <h3>Engineer</h2>
                         <p>id: ${data.id}</p>
                         <a href="mailto:${data.email}">email: ${data.email}</a></br>
-                        <a href="https://github.com/BooMajka" target="_blank">GitHub: ${data.engineer_github}</a>
+                        <a href="https://github.com/BooMajka" target="_blank">GitHub: ${data.github}</a>
                 </span>
             </div>
         </div>
-			`
-}
+			`;
+};
 
-const generateMarkdownIntern = data => {
-	return `
-	<div class="gallery-item item-${data.intern_id}">
+const generateMarkdownIntern = (data) => {
+  return `
+	<div class="gallery-item item-${data.id}">
             <div class="description-wrapper">
-                <h2 class="name">${data.intern_name}</h2>
+                <h2 class="name">${data.name}</h2>
                 <span class="position-title">
                     <h3>Intern</h2>
-                        <p>id: ${data.intern_id}</p>
-                        <a href="mailto:${data.intern_email}">email: ${data.intern_email}</a></br>
-                        <p>School: ${data.intern_school}</p>
+                        <p>id: ${data.id}</p>
+                        <a href="mailto:${data.email}">email: ${data.email}</a></br>
+                        <p>School: ${data.school}</p>
                 </span>
             </div>
         </div>
-			`
-}
+			`;
+};
 
-const generatePage = (manager, engineers, interns) => {
-console.log(manager, engineers, interns);
-manager.forEach(el => console.log(el));
+const generatePage = ( manager, engineers, interns ) => {
+
  return `
-
 	<!DOCTYPE html>
 <html lang="en">
 <head>

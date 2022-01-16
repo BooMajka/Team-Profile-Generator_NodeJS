@@ -92,37 +92,31 @@ let managerArray = [];
 let engineersArray = [];
 let internsArray = [];
 
-
 const chooseOption = () => {
   questionOptions().then((responsesDataOptions) => {
 
   if (responsesDataOptions.options[0] === "Add Engineer") {
     questionEngineer().then((responsesDataEngineer) => {
-      console.log("2");
       let engineer = new Engineer(responsesDataEngineer);
       engineer.name = responsesDataEngineer.engineer_name;
       engineer.id = responsesDataEngineer.engineer_id;
       engineer.email = responsesDataEngineer.engineer_email;
       engineer.gitHub = responsesDataEngineer.engineer_github;
       engineersArray.push(engineer);
-      // console.log("This is engineersArray:", engineersArray);
       chooseOption();
     });
 
   } else if (responsesDataOptions.options[0] === "Add Intern") {
     questionIntern().then((responsesDataIntern) => {
-       console.log("3");
       let intern = new Intern(responsesDataIntern);
       intern.name = responsesDataIntern.intern_name;
       intern.id = responsesDataIntern.intern_id;
       intern.email = responsesDataIntern.intern_email;
       intern.school = responsesDataIntern.intern_school;
       internsArray.push(intern);
-      //  console.log("This is internsArray:", internsArray);
       chooseOption();
     });
   } else if (responsesDataOptions.options[0] === "Save and Finish"){
-    console.log("4");
     return fs.writeFile(
       "index.html",
       generatePage(managerArray, engineersArray, internsArray),
@@ -133,22 +127,7 @@ const chooseOption = () => {
 })
 }
 
-    
-
-
-// const writeToFile = (file, data) => {
-//     console.log("4");
-//     writeToFile(
-//       "index.html",
-//       generatePage(managerArray, engineersArray, internsArray)
-//     );
-	// return fs.writeFile(file, data, (err) => {
-	// 	if (err) return console.error(err);
-	// 	});
-  // };
-
 const init = () => {
-    console.log("0");
   inquirer
     .prompt(questionManager)
     .then((responsesDataManager) => {
@@ -159,12 +138,10 @@ const init = () => {
       manager.email = responsesDataManager.manager_email;
       manager.number = responsesDataManager.manager_number;
       managerArray.push(manager);
-       console.log("1");
     })
     .then(() => {
       chooseOption();
     });
 };
-
 
 init();
