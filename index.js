@@ -11,21 +11,53 @@ const questionManager = [
     type: "input",
     name: "manager_name",
     message: "What is your name?",
+    validate: (nameInput) => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log("Please enter your name!");
+        return false;
+      }
+    },
   },
   {
     type: "input",
     name: "manager_id",
     message: "What is your id?",
+    validate: (idInput) => {
+      if (idInput) {
+        return true;
+      } else {
+        console.log("Please enter your id!");
+        return false;
+      }
+    },
   },
   {
     type: "input",
     name: "manager_email",
     message: "What is your email?",
+    validate: (emailInput) => {
+      if (emailInput) {
+        return true;
+      } else {
+        console.log("Please enter your email!");
+        return false;
+      }
+    },
   },
   {
     type: "input",
     name: "manager_number",
     message: "What is your phone number?",
+    validate: (numberInput) => {
+      if (numberInput) {
+        return true;
+      } else {
+        console.log("Please enter your number!");
+        return false;
+      }
+    },
   },
 ];
 const questionEngineer = () => {
@@ -34,21 +66,53 @@ const questionEngineer = () => {
       type: "input",
       name: "engineer_name",
       message: "What is engineer's name?",
+      validate: (nameInput) => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter engineer's name!");
+          return false;
+        }
+      },
     },
     {
       type: "input",
       name: "engineer_id",
       message: "What is engineer's id?",
+      validate: (idInput) => {
+        if (idInput) {
+          return true;
+        } else {
+          console.log("Please enter engineer's id!");
+          return false;
+        }
+      },
     },
     {
       type: "input",
       name: "engineer_email",
       message: "What is engineer's email?",
+      validate: (emailInput) => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter engineer's email!");
+          return false;
+        }
+      },
     },
     {
       type: "input",
       name: "engineer_github",
       message: "What is engineer's GitHub user?",
+      validate: (gitHubInput) => {
+        if (gitHubInput) {
+          return true;
+        } else {
+          console.log("Please enter engineer's gitHub");
+          return false;
+        }
+      },
     },
   ]);
 };
@@ -59,21 +123,53 @@ const questionIntern = () => {
       type: "input",
       name: "intern_name",
       message: "What is intern's name?",
+      validate: (nameInput) => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter intern's name!");
+          return false;
+        }
+      },
     },
     {
       type: "input",
       name: "intern_id",
       message: "What is intern's id?",
+      validate: (idInput) => {
+        if (idInput) {
+          return true;
+        } else {
+          console.log("Please enter intern's id!");
+          return false;
+        }
+      },
     },
     {
       type: "input",
       name: "intern_email",
       message: "What is intern's email?",
+      validate: (emailInput) => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter intern's email!");
+          return false;
+        }
+      },
     },
     {
       type: "input",
       name: "intern_school",
       message: "What is intern's school?",
+      validate: (schoolInput) => {
+        if (schoolInput) {
+          return true;
+        } else {
+          console.log("Please enter intern's school!");
+          return false;
+        }
+      },
     },
   ]);
 };
@@ -131,7 +227,6 @@ const init = () => {
   inquirer
     .prompt(questionManager)
     .then((responsesDataManager) => {
-      console.log("This is responsesDataManager:", responsesDataManager);
       let manager = new Manager(responsesDataManager);
       manager.name = responsesDataManager.manager_name;
       manager.id = responsesDataManager.manager_id;
@@ -141,7 +236,10 @@ const init = () => {
     })
     .then(() => {
       chooseOption();
-    });
-};
+    })
+  }
+    
+  
+
 
 init();

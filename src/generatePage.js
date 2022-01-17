@@ -48,7 +48,6 @@ const generateMarkdownIntern = (data) => {
 };
 
 const generatePage = ( manager, engineers, interns ) => {
-
  return `
 	<!DOCTYPE html>
 <html lang="en">
@@ -63,11 +62,11 @@ const generatePage = ( manager, engineers, interns ) => {
     <header class="title">My Team</header>
     <div class="gallery-wrapper">
 
-	${manager.forEach((el) => generateMarkdownManager(el))}
+	${manager.map((el) => generateMarkdownManager(el))}
 
-	${engineers.forEach((el) => generateMarkdownEngineer(el))}
+	${engineers.map((el) => generateMarkdownEngineer(el))}
 
-	${interns.forEach((el) => generateMarkdownIntern(el))}
+	${interns.map((el) => generateMarkdownIntern(el))}
 
 	</div>
 	</body>
